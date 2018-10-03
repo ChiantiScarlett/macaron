@@ -1,3 +1,11 @@
+###############################################################################
+#                        <Macaron - Movie Data Parser>                        #
+#                                                                             #
+#                                           Designed by Chianti Scarlett      #
+#                                              Last Modified: 3 Oct 2018      #
+###############################################################################
+
+
 from pprint import pprint
 from json import loads
 from re import sub
