@@ -1,13 +1,16 @@
 [{
     "index": 1,
     "name": "타이타닉",
-    "movieId": 1051
+    "movieId": 1051,
+    "custom_link": "https://movie.naver.com/movie/bi/mi/basic.nhn?code=18847" 
 }, {
     "index": 2,
     "name": "레옹",
-    "movieId": 1173
+    "movieId": 1173,
+    "custom_link": "https://movie.naver.com/movie/bi/mi/basic.nhn?code=17170"
 }, {
     "index": 3,
     "name": "쇼생크 탈출",
-    "movieId": 1368
+    "movieId": 1368,
+    "custom_link": "https://movie.naver.com/movie/bi/mi/basic.nhn?code=17421"
 }]
