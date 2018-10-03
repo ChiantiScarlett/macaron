@@ -28,12 +28,18 @@ def parse_movie(code):
         'title_EN': None,
         'country': [],
         'genre': [],
+        'year': None,
         'duration': None,
         'rating': None,
-        'img_URL': None,  # Small Image
+        'img_URL': None,
+        'summary': None,
+        'director': [],
+        'actors': []
     }
-    movie['title_KR'] = info.find('strong',
-                                  {'class': 'tit_movie'}).text.strip()
+
+    title = info.find('strong', {'class': 'tit_movie'}).text.strip().split()
+    movie['year'] = title.pop(-1)[1:-1]
+    movie['title_KR'] = " ".join(title)
     movie['title_EN'] = info.find('span',
                                   {'class': 'txt_origin'}).text.strip()
 
@@ -49,12 +55,32 @@ def parse_movie(code):
 
     movie['img_URL'] = unquote(html.find('img')['src'].split('fname=')[1])
 
+    movie['summary'] = html.find('div', {'class': 'desc_movie'}).find('p') \
+        .text.replace('\t', '').strip()
+
+    # Parse director and actors info
+    actors = html.find('ul', {'class': 'list_staff'})
+    for li in actors.find_all('li'):
+        staff = {}
+        staff['name_KR'] = li.find('strong').find('em').text
+        staff['name_EN'] = li.find('strong').text. \
+            replace(staff['name_KR'], '').strip()
+        staff['role'] = li.find('span', {'class': 'txt_awards'}).text.strip()
+
+        if staff['role'] == '감독':
+            movie['director'].append(staff)
+        else:
+            movie['actors'].append(staff)
+
     return movie
 
 
 def main():
-    movie = parse_movie(code=3236)
-    pprint(movie)
+    movies = "100237 73003 97399 93697 109512 100359 106993 98333".split()
+
+    for code in movies:
+        movie = parse_movie(code=code)
+        pprint(movie)
 
 
 if __name__ == "__main__":
