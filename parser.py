@@ -1,6 +1,5 @@
 from urllib.request import urlopen, Request, unquote
 from bs4 import BeautifulSoup as Soup
-from pprint import pprint
 
 
 def parse_URL(URL):
@@ -73,15 +72,3 @@ def parse_movie(code):
             movie['actors'].append(staff)
 
     return movie
-
-
-def main():
-    movies = "100237 73003 97399 93697 109512 100359 106993 98333".split()
-
-    for code in movies:
-        movie = parse_movie(code=code)
-        pprint(movie)
-
-
-if __name__ == "__main__":
-    main()
