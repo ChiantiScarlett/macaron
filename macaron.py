@@ -6,12 +6,13 @@
 ###############################################################################
 
 
-from pprint import pprint
 from json import loads
 from re import sub
+import argparse
+
 from parser import parse_movie
 from error import raise_error
-import argparse
+from export import export_MD
 
 
 def main(args):
@@ -39,9 +40,20 @@ def main(args):
     data = sorted(data, key=lambda k: k['index'])
 
     # Parse movie data
-    for movie in data:
-        movie = parse_movie(code=movie['movieId'])
-        pprint(movie)
+    movies_data = []
+    for item in data:
+        movie_data = parse_movie(code=item['movieId'])
+        movie_data['index'] = item['index']
+        movies_data.append(movie_data)
+        print("[*] Parsed {}. {} [movieId={}]".format(item['index'],
+                                                      item['name'],
+                                                      item['movieId']))
+
+    # Save data
+    with open(args.output, 'w') as fp:
+        fp.write(export_MD(movies_data))
+        print('[*] Successfully exported movie data to [{}]'
+              .format(args.output))
 
 
 def read_args():

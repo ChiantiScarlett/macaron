@@ -35,16 +35,6 @@ def parse_URL(URL):
                     'Please check your network status.')
 
 
-def parse_book(ISBN):
-    """
-    Description:
-        This function parses data from book.naver.com using NAVER API.
-        For further uses, please take a look at developers.naver.com and
-        generate your own API code.
-    """
-    pass
-
-
 def parse_movie(code):
     """
     Description:
@@ -75,9 +65,8 @@ def parse_movie(code):
         'role'      | Person's role in the movie                | <str>
 
     """
-
     html = parse_URL("https://movie.daum.net/moviedb/main?movieId={}"
-                     .format(quote(code)))
+                     .format(code))
     info = html.find('div', {'class': 'movie_summary'})
 
     # Movie format
