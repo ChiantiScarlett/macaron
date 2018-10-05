@@ -35,6 +35,16 @@ def parse_URL(URL):
                     'Please check your network status.')
 
 
+def parse_book(ISBN):
+    """
+    Description:
+        This function parses data from book.naver.com using NAVER API.
+        For further uses, please take a look at developers.naver.com and
+        generate your own API code.
+    """
+    pass
+
+
 def parse_movie(code):
     """
     Description:
